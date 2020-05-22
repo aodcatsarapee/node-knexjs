@@ -6,5 +6,5 @@ module.exports = function (app) {
     auth.verifyToken,
     assesscontrol.getAssessControl
   );
-  app.get("/checkRole", auth.verifyToken, assesscontrol.checkRole);
+  app.post("/checkRole", auth.verifyToken, assesscontrol.checkRole);
 };
