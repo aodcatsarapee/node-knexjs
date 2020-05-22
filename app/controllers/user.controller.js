@@ -5,7 +5,12 @@ module.exports = {
   getUser: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err) => {
       if (err) {
-        res.sendStatus(401);
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
       } else {
         (async () => {
           let count = 0;
@@ -34,7 +39,12 @@ module.exports = {
   getUserByID: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err) => {
       if (err) {
-        res.sendStatus(401);
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
       } else {
         userModel
           .getUserByID(req)
@@ -50,7 +60,12 @@ module.exports = {
   checkUsername: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err) => {
       if (err) {
-        res.sendStatus(401);
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
       } else {
         userModel
           .checkUsername(req)

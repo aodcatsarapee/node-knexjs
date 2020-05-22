@@ -19,7 +19,7 @@ module.exports = {
           jwt.sign(
             { user },
             env.SECRETKEY,
-            { expiresIn: "3h" },
+            { expiresIn: "12h" },
             (err, token) => {
               if (!err) {
                 res.send({

@@ -5,7 +5,12 @@ module.exports = {
   getAssessControl: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
       if (err) {
-        res.sendStatus(401);
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
       } else {
         let assesscontrol = [];
         assessControlModel
@@ -41,7 +46,12 @@ module.exports = {
   checkRole: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
       if (err) {
-        res.sendStatus(401);
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
       } else {
         assessControlModel
           .checkRole(data_token.user.role_id, req.body.menu_id)
