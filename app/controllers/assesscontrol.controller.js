@@ -38,4 +38,25 @@ module.exports = {
       }
     });
   },
+  checkRole: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
+      if (err) {
+        res.sendStatus(401);
+      } else {
+        assessControlModel
+          .checkRole(data_token.user.role_id, req.body.menu_id)
+          .then((row) => {
+            let data = {
+              response: true,
+              message: "200 OK",
+              data: row,
+            };
+            res.send(data);
+          })
+          .catch((error) => {
+            res.status(500).send(error);
+          });
+      }
+    });
+  },
 };

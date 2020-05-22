@@ -30,4 +30,11 @@ module.exports = {
       .whereIn("menu.menu_status_id", [1, 3])
       .orderBy("menu.menu_sort");
   },
+  checkRole(role_id, menu_id) {
+    return db
+      .select("*")
+      .from("map_menu_role")
+      .where("map_menu_role.role_id", role_id)
+      .where("map_menu_role.menu_id", menu_id);
+  },
 };
