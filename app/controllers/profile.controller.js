@@ -34,6 +34,28 @@ let fs = require("fs");
 // crypto
 const crypto = require("crypto");
 module.exports = {
+  /**
+   * @api {post} updateprofile Update User
+   * @apiVersion 0.0.1
+   * @apiDescription  API ของ Update User
+   * @apiGroup Profile
+   * @apiHeaderExample {json} Header-Example:
+   *    {
+   *      "Authorization": ""
+   *    }
+   * @apiParamExample {json} Body:
+   * {
+   *       "user_fullname": "",
+   *       "user_email": "",
+   *       "user_address": "",
+   *       "user_tel": "",
+   * }
+   * @apiSuccessExample {json} Success-Response:
+   *  {
+   *   "response": true,
+   *   "message": "200 OK"
+   * }
+   */
   updateProfile: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
       if (err) {

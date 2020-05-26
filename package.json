@@ -15,7 +15,9 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "apidoc": "^0.22.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
