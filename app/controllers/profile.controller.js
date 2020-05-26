@@ -31,6 +31,8 @@ const upload = multer({
 }).single("user_image");
 // file
 let fs = require("fs");
+// crypto
+const crypto = require("crypto");
 module.exports = {
   updateProfile: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
@@ -119,6 +121,87 @@ module.exports = {
             res.send(data);
           }
         });
+      }
+    });
+  },
+  updatePassword: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        if (
+          req.body.user_password !== "" &&
+          req.body.user_password_new !== "" &&
+          req.body.user_password_confirm !== ""
+        ) {
+          profileModel
+            .getUser(data_token.user.user_id)
+            .then((data_user) => {
+              let user_password_check = crypto
+                .createHash("sha256")
+                .update(data_user[0].user_username + req.body.user_password)
+                .digest("base64");
+              if (user_password_check === data_user[0].user_password) {
+                if (
+                  req.body.user_password_new === req.body.user_password_confirm
+                ) {
+                  let user_password_add = crypto
+                    .createHash("sha256")
+                    .update(
+                      data_user[0].user_username + req.body.user_password_new
+                    )
+                    .digest("base64");
+
+                  let update_data = {
+                    user_password: user_password_add,
+                    user_update: myDate,
+                  };
+                  profileModel
+                    .updateProfile(data_token.user.user_id, update_data)
+                    .then(() => {
+                      let data = {
+                        response: true,
+                        message: "เปลื่ยน Password เรียบร้อยเเล้ว",
+                        data: [],
+                      };
+                      res.send(data);
+                    })
+                    .catch((error) => {
+                      res.status(500).send(error);
+                    });
+                } else {
+                  let data = {
+                    response: true,
+                    message: "Password ไม่ตรงกัน",
+                    data: [],
+                  };
+                  res.send(data);
+                }
+              } else {
+                let data = {
+                  response: true,
+                  message: "Password เดิมไม่ถูกต้อง",
+                  data: [],
+                };
+                res.send(data);
+              }
+            })
+            .catch((error) => {
+              res.status(500).send(error);
+            });
+        } else {
+          let data = {
+            response: true,
+            message: "204 No Content",
+            data: [],
+          };
+          res.send(data);
+        }
       }
     });
   },
