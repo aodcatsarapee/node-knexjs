@@ -14,5 +14,6 @@ module.exports = function () {
   require("../app/routes/user.routes")(app);
   require("../app/routes/auth.routes")(app);
   require("../app/routes/assesscontrol.routes")(app);
+  require("../app/routes/profile.routes")(app);
   return app;
 };
