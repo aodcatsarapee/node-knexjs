@@ -2,6 +2,7 @@ const express = require("express");
 const bodypaarser = require("body-parser");
 module.exports = function () {
   const app = express();
+  app.use(bodypaarser.urlencoded({ extended: false }));
   app.use(bodypaarser.json());
   // allow cors
   app.use(function (req, res, next) {
