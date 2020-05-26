@@ -54,12 +54,31 @@ module.exports = {
         profileModel
           .updateProfile(data_token.user.user_id, update_data)
           .then(() => {
-            let data = {
-              response: true,
-              message: "200 OK",
-              data: [],
-            };
-            res.send(data);
+            profileModel
+              .getUser(data_token.user.user_id)
+              .then((data_user) => {
+                let data = {
+                  response: true,
+                  message: "200 OK",
+                  data: {
+                    role_id: data_user[0].role_id,
+                    role_name: data_user[0].role_name,
+                    user_address: data_user[0].user_address,
+                    user_email: data_user[0].user_email,
+                    user_fullname: data_user[0].user_fullname,
+                    user_id: data_user[0].user_id,
+                    user_image: data_user[0].user_image,
+                    user_status_id: data_user[0].user_status_id,
+                    user_status_name: data_user[0].user_status_name,
+                    user_tel: data_user[0].user_tel,
+                    user_username: data_user[0].user_username,
+                  },
+                };
+                res.send(data);
+              })
+              .catch((error) => {
+                res.status(500).send(error);
+              });
           })
           .catch((error) => {
             res.status(500).send(error);
@@ -101,7 +120,19 @@ module.exports = {
                     let data = {
                       response: true,
                       message: "200 OK",
-                      data: [],
+                      data: {
+                        role_id: data_user[0].role_id,
+                        role_name: data_user[0].role_name,
+                        user_address: data_user[0].user_address,
+                        user_email: data_user[0].user_email,
+                        user_fullname: data_user[0].user_fullname,
+                        user_id: data_user[0].user_id,
+                        user_image: data_user[0].user_image,
+                        user_status_id: data_user[0].user_status_id,
+                        user_status_name: data_user[0].user_status_name,
+                        user_tel: data_user[0].user_tel,
+                        user_username: data_user[0].user_username,
+                      },
                     };
                     res.send(data);
                   })
