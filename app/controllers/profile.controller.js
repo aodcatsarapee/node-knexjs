@@ -127,7 +127,7 @@ module.exports = {
                         user_email: data_user[0].user_email,
                         user_fullname: data_user[0].user_fullname,
                         user_id: data_user[0].user_id,
-                        user_image: data_user[0].user_image,
+                        user_image: req.file.filename,
                         user_status_id: data_user[0].user_status_id,
                         user_status_name: data_user[0].user_status_name,
                         user_tel: data_user[0].user_tel,
