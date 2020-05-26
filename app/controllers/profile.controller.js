@@ -35,9 +35,9 @@ let fs = require("fs");
 const crypto = require("crypto");
 module.exports = {
   /**
-   * @api {post} updateprofile Update User
+   * @api {post} updateprofile Update Profile
    * @apiVersion 0.0.1
-   * @apiDescription  API ของ Update User
+   * @apiDescription  API ของ Update Profile
    * @apiGroup Profile
    * @apiHeaderExample {json} Header-Example:
    *    {
@@ -108,6 +108,25 @@ module.exports = {
       }
     });
   },
+  /**
+   * @api {post} uploadprofile Upload Profile
+   * @apiVersion 0.0.1
+   * @apiDescription  API ของ Upload Profile
+   * @apiGroup Profile
+   * @apiHeaderExample {json} Header-Example:
+   *    {
+   *      "Authorization": ""
+   *    }
+   * @apiParamExample {json} Body:
+   * {
+   *       "user_image": ""
+   * }
+   * @apiSuccessExample {json} Success-Response:
+   *  {
+   *   "response": true,
+   *   "message": "200 OK"
+   * }
+   */
   uploadProfile: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
       if (err) {
@@ -177,6 +196,27 @@ module.exports = {
       }
     });
   },
+  /**
+   * @api {post} updatepassword Update Password
+   * @apiVersion 0.0.1
+   * @apiDescription  API ของ Upload Password
+   * @apiGroup Profile
+   * @apiHeaderExample {json} Header-Example:
+   *    {
+   *      "Authorization": ""
+   *    }
+   * @apiParamExample {json} Body:
+   * {
+   *       "user_password": "",
+   *       "user_password_new": "",
+   *       "user_password_confirm": ""
+   * }
+   * @apiSuccessExample {json} Success-Response:
+   *  {
+   *   "response": true,
+   *   "message": "200 OK"
+   * }
+   */
   updatePassword: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
       if (err) {
