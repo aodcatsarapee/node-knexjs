@@ -9,10 +9,8 @@ module.exports = {
         .where(function () {
           if (req.query.search != "") {
             this.where('user.user_id', 'like', '%' + req.query.search + '%')
-            this.orWhere('user.username', 'like', '%' + req.query.search + '%')
-          }
-          if (req.query.ref_user_status_id != "") {
-            this.where('user.user_status_id', 'like', '%' + req.query.ref_user_status_id + '%')
+            this.orWhere('user.user_username', 'like', '%' + req.query.search + '%')
+            this.orWhere('user.user_fullname', 'like', '%' + req.query.search + '%')
           }
         })
     )
@@ -26,10 +24,8 @@ module.exports = {
         .where(function () {
           if (req.query.search != "") {
             this.where('user.user_id', 'like', '%' + req.query.search + '%')
-            this.orWhere('user.username', 'like', '%' + req.query.search + '%')
-          }
-          if (req.query.ref_user_status_id != "") {
-            this.where('user.user_status_id', 'like', '%' + req.query.ref_user_status_id + '%')
+            this.orWhere('user.user_username', 'like', '%' + req.query.search + '%')
+            this.orWhere('user.user_fullname', 'like', '%' + req.query.search + '%')
           }
         })
         .offset(req.query.offset)

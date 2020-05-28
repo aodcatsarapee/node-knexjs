@@ -31,7 +31,14 @@ module.exports = {
             .catch((error) => {
               res.status(500).send(error);
             });
-          res.send({ count, datas });
+
+          let data_all = {
+            response: true,
+            message: "200 OK",
+            count: count,
+            data: datas
+          };
+          res.send(data_all);
         })();
       }
     });
