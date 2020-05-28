@@ -259,6 +259,7 @@ module.exports = {
                     .then(() => {
                       let data = {
                         response: true,
+                        status: 1,
                         message: "เปลื่ยน Password เรียบร้อยเเล้ว",
                         data: [],
                       };
@@ -270,6 +271,7 @@ module.exports = {
                 } else {
                   let data = {
                     response: true,
+                    status: 0,
                     message: "Password ไม่ตรงกัน",
                     data: [],
                   };
@@ -278,6 +280,7 @@ module.exports = {
               } else {
                 let data = {
                   response: true,
+                  status: 0,
                   message: "Password เดิมไม่ถูกต้อง",
                   data: [],
                 };
