@@ -88,8 +88,26 @@ module.exports = {
         res.send(data);
       } else {
         userModel
-          .getUserByID(req)
-          .then((data) => {
+          .getUserByID(req.query.user_id)
+          .then((data_user) => {
+            let data = {
+              response: true,
+              message: "200 OK",
+              data: {
+                role_id: data_user[0].role_id,
+                role_name: data_user[0].role_name,
+                user_id: data_user[0].user_id,
+                user_username: data_user[0].user_username,
+                user_fullname: data_user[0].user_fullname,
+                user_address: data_user[0].user_address,
+                user_email: data_user[0].user_email,
+                user_image: data_user[0].user_image,
+                user_status_id: data_user[0].user_status_id,
+                user_status_name: data_user[0].user_status_name,
+                user_tel: data_user[0].user_tel,
+                user_create: moment(data_user[0].user_create).format("YYYY-MM-DD HH:mm:ss")
+              },
+            };
             res.send(data);
           })
           .catch((error) => {
@@ -110,8 +128,15 @@ module.exports = {
       } else {
         userModel
           .checkUsername(req)
-          .then((data) => {
-            res.send({ data });
+          .then((data_user) => {
+            let data = {
+              response: true,
+              message: "200 OK",
+              data: {
+                user_id: data_user[0].user_id,
+              }
+            };
+            res.send(data);
           })
           .catch((error) => {
             res.status(500).send(error);
@@ -177,6 +202,85 @@ module.exports = {
             }
             userModel
               .addUser(data_add)
+              .then(() => {
+                let data = {
+                  response: true,
+                  message: "200 OK",
+                  data: [],
+                };
+                res.send(data);
+              })
+              .catch((error) => {
+                res.status(500).send(error);
+              });
+          }
+        })
+      }
+    });
+  },
+  updateUser: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        upload(req, res, function () {
+          if (typeof req.file !== "undefined") {
+            userModel
+              .getUserByID(req.body.user_id)
+              .then((data_user) => {
+                if (data_user[0].user_image != "none.png") {
+                  fs.unlink(
+                    "assets/upload/user/" + data_user[0].user_image,
+                    function (err) {
+                      if (err) return console.log(err);
+                      console.log("file deleted successfully");
+                    }
+                  );
+                }
+                let data_update = {
+                  user_email: req.body.user_email,
+                  user_fullname: req.body.user_fullname,
+                  user_address: req.body.user_address,
+                  user_tel: req.body.user_tel,
+                  role_id: req.body.role_id,
+                  user_status_id: req.body.user_status_id,
+                  user_image: req.file.filename,
+                  user_update: myDate,
+                }
+                userModel
+                  .updateUser(req.body.user_id, data_update)
+                  .then(() => {
+                    let data = {
+                      response: true,
+                      message: "200 OK",
+                      data: [],
+                    };
+                    res.send(data);
+                  })
+                  .catch((error) => {
+                    res.status(500).send(error);
+                  });
+              })
+              .catch((error) => {
+                res.status(500).send(error);
+              });
+          } else {
+            let data_update = {
+              user_email: req.body.user_email,
+              user_fullname: req.body.user_fullname,
+              user_address: req.body.user_address,
+              user_tel: req.body.user_tel,
+              role_id: req.body.role_id,
+              user_status_id: req.body.user_status_id,
+              user_update: myDate,
+            }
+            userModel
+              .updateUser(req.body.user_id, data_update)
               .then(() => {
                 let data = {
                   response: true,

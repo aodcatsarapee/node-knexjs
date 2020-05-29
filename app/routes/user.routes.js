@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.get("/getuserbyid", auth.verifyToken, user.getUserByID);
   app.get("/checkusername", auth.verifyToken, user.checkUsername);
   app.post("/adduser", auth.verifyToken, user.addUser);
-  // app.post("/edituser", user.EditUser);
+  app.post("/updateuser", auth.verifyToken, user.updateUser);
   // app.post("/updateuserpassword", user.UpdateUserPassword);
   // app.post("/deleteuser", user.DeleteUser);
 };
