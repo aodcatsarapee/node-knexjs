@@ -129,14 +129,23 @@ module.exports = {
         userModel
           .checkUsername(req)
           .then((data_user) => {
-            let data = {
-              response: true,
-              message: "200 OK",
-              data: {
-                user_id: data_user[0].user_id,
-              }
-            };
-            res.send(data);
+            if (data_user.length === 1) {
+              let data = {
+                response: true,
+                status: 0,
+                message: "username นี้มีผู้ใช้งานนี้เเล้ว",
+                data: []
+              };
+              res.send(data);
+            } else {
+              let data = {
+                response: true,
+                status: 1,
+                message: "สามารถใช้ username นี้ได้",
+                data: []
+              };
+              res.send(data);
+            }
           })
           .catch((error) => {
             res.status(500).send(error);
