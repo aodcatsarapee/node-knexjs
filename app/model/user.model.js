@@ -55,4 +55,7 @@ module.exports = {
   updateUser(user_id, data) {
     return db("user").update(data).where("user.user_id", user_id);
   },
+  deleteUser(user_id) {
+    return db("user").where("user.user_id", user_id).del();
+  }
 }

@@ -7,5 +7,5 @@ module.exports = function (app) {
   app.post("/adduser", auth.verifyToken, user.addUser);
   app.post("/updateuser", auth.verifyToken, user.updateUser);
   app.post("/updateuserpassword", auth.verifyToken, user.updateUserPassword);
-  // app.post("/deleteuser", user.DeleteUser);
+  app.post("/deleteuser", auth.verifyToken, user.deleteUser);
 };

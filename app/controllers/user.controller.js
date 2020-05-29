@@ -366,4 +366,46 @@ module.exports = {
       }
     });
   },
+  deleteUser: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        userModel
+          .getUserByID(req.body.user_id)
+          .then((data_user) => {
+            if (data_user[0].user_image != "none.png") {
+              fs.unlink(
+                "assets/upload/user/" + data_user[0].user_image,
+                function (err) {
+                  if (err) return console.log(err);
+                  console.log("file deleted successfully");
+                }
+              );
+            }
+            userModel
+              .deleteUser(req.body.user_id)
+              .then(() => {
+                let data = {
+                  response: true,
+                  message: "ดำเนินการเรียบร้อยเเล้ว",
+                  data: [],
+                };
+                res.send(data);
+              })
+              .catch((error) => {
+                res.status(500).send(error);
+              });
+          })
+          .catch((error) => {
+            res.status(500).send(error);
+          });
+      }
+    });
+  },
 };
