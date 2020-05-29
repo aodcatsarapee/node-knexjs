@@ -49,5 +49,8 @@ module.exports = {
         .from("user")
         .where("user.user_username", req.query.user_username)
     )
+  },
+  addUser(data) {
+    return db("user").insert(data);
   }
 }
