@@ -297,4 +297,73 @@ module.exports = {
       }
     });
   },
+  updateUserPassword: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        if (
+          req.body.user_password_new !== "" &&
+          req.body.user_password_confirm !== ""
+        ) {
+          if (
+            req.body.user_password_new === req.body.user_password_confirm
+          ) {
+            userModel
+              .getUserByID(req.body.user_id)
+              .then((data_user) => {
+                let user_password_add = crypto
+                  .createHash("sha256")
+                  .update(
+                    data_user[0].user_username + req.body.user_password_new
+                  )
+                  .digest("base64");
+                let update_data = {
+                  user_password: user_password_add,
+                  user_update: myDate,
+                };
+                userModel
+                  .updateUser(req.body.user_id, update_data)
+                  .then(() => {
+                    let data = {
+                      response: true,
+                      status: 1,
+                      message: "เปลื่ยน Password เรียบร้อยเเล้ว",
+                      data: [],
+                    };
+                    res.send(data);
+                  })
+                  .catch((error) => {
+                    res.status(500).send(error);
+                  });
+
+              }).catch((error) => {
+                res.status(500).send(error);
+              });
+          } else {
+            let data = {
+              response: true,
+              status: 0,
+              message: "Password ไม่ตรงกัน",
+              data: [],
+            };
+            res.send(data);
+          }
+        } else {
+          let data = {
+            response: true,
+            status: 0,
+            message: "204 No Content",
+            data: [],
+          };
+          res.send(data);
+        }
+      }
+    });
+  },
 };

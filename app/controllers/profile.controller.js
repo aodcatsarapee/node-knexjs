@@ -293,6 +293,7 @@ module.exports = {
         } else {
           let data = {
             response: true,
+            status: 0,
             message: "204 No Content",
             data: [],
           };

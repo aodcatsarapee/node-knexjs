@@ -6,6 +6,6 @@ module.exports = function (app) {
   app.get("/checkusername", auth.verifyToken, user.checkUsername);
   app.post("/adduser", auth.verifyToken, user.addUser);
   app.post("/updateuser", auth.verifyToken, user.updateUser);
-  // app.post("/updateuserpassword", user.UpdateUserPassword);
+  app.post("/updateuserpassword", auth.verifyToken, user.updateUserPassword);
   // app.post("/deleteuser", user.DeleteUser);
 };
