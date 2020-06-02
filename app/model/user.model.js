@@ -12,6 +12,14 @@ module.exports = {
             this.orWhere('user.user_username', 'like', '%' + req.query.search + '%')
             this.orWhere('user.user_fullname', 'like', '%' + req.query.search + '%')
           }
+        }).where(function () {
+          if (req.query.user_status_id != "") {
+            this.where('user.user_status_id', req.query.user_status_id)
+          }
+        }).where(function () {
+          if (req.query.role_id != "") {
+            this.where('user.role_id', req.query.role_id)
+          }
         })
     )
   },
@@ -26,6 +34,14 @@ module.exports = {
             this.where('user.user_id', 'like', '%' + req.query.search + '%')
             this.orWhere('user.user_username', 'like', '%' + req.query.search + '%')
             this.orWhere('user.user_fullname', 'like', '%' + req.query.search + '%')
+          }
+        }).where(function () {
+          if (req.query.user_status_id != "") {
+            this.where('user.user_status_id', req.query.user_status_id)
+          }
+        }).where(function () {
+          if (req.query.role_id != "") {
+            this.where('user.role_id', req.query.role_id)
           }
         })
         .offset(req.query.offset)
