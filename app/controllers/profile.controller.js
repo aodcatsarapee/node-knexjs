@@ -3,7 +3,7 @@ const env = require("../../config/env");
 const profileModel = require("../model/profile.model");
 // date time
 const moment = require("moment");
-const myDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
 
 // upload file
 const multer = require("multer");
@@ -71,7 +71,7 @@ module.exports = {
           user_email: req.body.user_email,
           user_address: req.body.user_address,
           user_tel: req.body.user_tel,
-          user_update: myDate,
+          user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         };
         profileModel
           .updateProfile(data_token.user.user_id, update_data)
@@ -153,7 +153,7 @@ module.exports = {
                 }
                 let update_data = {
                   user_image: req.file.filename,
-                  user_update: myDate,
+                  user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                 };
                 profileModel
                   .updateProfile(data_token.user.user_id, update_data)
@@ -252,7 +252,7 @@ module.exports = {
 
                   let update_data = {
                     user_password: user_password_add,
-                    user_update: myDate,
+                    user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                   };
                   profileModel
                     .updateProfile(data_token.user.user_id, update_data)

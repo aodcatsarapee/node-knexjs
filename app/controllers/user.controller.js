@@ -4,8 +4,6 @@ const userModel = require("../model/user.model");
 
 // date time
 const moment = require("moment");
-const myDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-
 // upload file
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -181,7 +179,7 @@ module.exports = {
               role_id: req.body.role_id,
               user_status_id: 1,
               user_image: req.file.filename,
-              user_create: myDate,
+              user_create: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
             }
             userModel
               .addUser(data_add)
@@ -207,7 +205,7 @@ module.exports = {
               role_id: req.body.role_id,
               user_status_id: 1,
               user_image: "user_none.png",
-              user_create: myDate,
+              user_create: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
             }
             userModel
               .addUser(data_add)
@@ -259,7 +257,7 @@ module.exports = {
                   role_id: req.body.role_id,
                   user_status_id: req.body.user_status_id,
                   user_image: req.file.filename,
-                  user_update: myDate,
+                  user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                 }
                 userModel
                   .updateUser(req.body.user_id, data_update)
@@ -286,7 +284,7 @@ module.exports = {
               user_tel: req.body.user_tel,
               role_id: req.body.role_id,
               user_status_id: req.body.user_status_id,
-              user_update: myDate,
+              user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
             }
             userModel
               .updateUser(req.body.user_id, data_update)
@@ -334,7 +332,7 @@ module.exports = {
                   .digest("base64");
                 let update_data = {
                   user_password: user_password_add,
-                  user_update: myDate,
+                  user_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                 };
                 userModel
                   .updateUser(req.body.user_id, update_data)
