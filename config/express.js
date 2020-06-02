@@ -12,6 +12,7 @@ module.exports = function () {
     next();
   });
   app.use(express.static("assets/upload/user"));
+  app.use(express.static("assets/upload/member"));
   require("../app/routes/user.routes")(app);
   require("../app/routes/auth.routes")(app);
   require("../app/routes/assesscontrol.routes")(app);

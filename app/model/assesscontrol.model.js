@@ -37,4 +37,9 @@ module.exports = {
       .where("map_menu_role.role_id", role_id)
       .where("map_menu_role.menu_id", menu_id);
   },
+  getRole() {
+    return db
+      .select("role.role_id", 'role.role_name')
+      .from("role")
+  }
 };

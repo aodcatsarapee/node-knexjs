@@ -206,7 +206,7 @@ module.exports = {
               user_tel: req.body.user_tel,
               role_id: req.body.role_id,
               user_status_id: 1,
-              user_image: "none.png",
+              user_image: "user_none.png",
               user_create: myDate,
             }
             userModel
@@ -242,7 +242,7 @@ module.exports = {
             userModel
               .getUserByID(req.body.user_id)
               .then((data_user) => {
-                if (data_user[0].user_image != "none.png") {
+                if (data_user[0].user_image != "user_none.png") {
                   fs.unlink(
                     "assets/upload/user/" + data_user[0].user_image,
                     function (err) {
@@ -388,7 +388,7 @@ module.exports = {
         userModel
           .getUserByID(req.body.user_id)
           .then((data_user) => {
-            if (data_user[0].user_image != "none.png") {
+            if (data_user[0].user_image != "user_none.png") {
               fs.unlink(
                 "assets/upload/user/" + data_user[0].user_image,
                 function (err) {

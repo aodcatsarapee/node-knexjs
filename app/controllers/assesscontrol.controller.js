@@ -69,4 +69,30 @@ module.exports = {
       }
     });
   },
+  getRole: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err, data_token) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        assessControlModel
+          .getRole()
+          .then((row) => {
+            let data = {
+              response: true,
+              message: "200 OK",
+              data: row,
+            };
+            res.send(data);
+          })
+          .catch((error) => {
+            res.status(500).send(error);
+          });
+      }
+    });
+  },
 };
