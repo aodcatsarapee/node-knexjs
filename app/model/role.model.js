@@ -5,13 +5,21 @@ module.exports = {
       .select("role.role_id", 'role.role_name')
       .from("role")
   },
-  getListMenu() {
+  getListMenu(role_id) {
+    return db
+      .select("*")
+      .from("group_menu")
+      .join("menu", "menu.group_menu_id", "=", "group_menu.group_menu_id")
+      .join("map_menu_role", "map_menu_role.menu_id", "=", "menu.menu_id").where("map_menu_role.role_id", role_id)
+  },
+  getListMenuNotin(menu_id) {
     return db
       .select("*")
       .from("menu")
-      .join("group_menu", "group_menu.group_menu_id", "=", "menu.group_menu_id")
+      .leftJoin("group_menu", "group_menu.group_menu_id", "=", "menu.group_menu_id")
+      .whereNotIn('menu.menu_id', menu_id)
   },
-  checkMaproleMenu(role, menu_id) {
+  checkMapMemuRole(role, menu_id) {
     return db
       .select("*")
       .from("map_menu_role")
