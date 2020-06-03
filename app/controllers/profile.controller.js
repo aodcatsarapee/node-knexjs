@@ -142,7 +142,7 @@ module.exports = {
             profileModel
               .getUser(data_token.user.user_id)
               .then((data_user) => {
-                if (data_user[0].user_image != "user_none.png") {
+                if (data_user[0].user_image != "none.png") {
                   fs.unlink(
                     "assets/upload/user/" + data_user[0].user_image,
                     function (err) {

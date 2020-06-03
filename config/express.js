@@ -11,8 +11,7 @@ module.exports = function () {
     res.header("Access-Control-Allow-Headers", "*");
     next();
   });
-  app.use(express.static("assets/upload/user"));
-  app.use(express.static("assets/upload/member"));
+  app.use('/assets/upload/user', express.static('assets/upload/user'))
   require("../app/routes/user.routes")(app);
   require("../app/routes/auth.routes")(app);
   require("../app/routes/assesscontrol.routes")(app);
