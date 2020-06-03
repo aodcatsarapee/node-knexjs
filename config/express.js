@@ -17,5 +17,6 @@ module.exports = function () {
   require("../app/routes/assesscontrol.routes")(app);
   require("../app/routes/profile.routes")(app);
   require("../app/routes/role.routes")(app);
+  require("../app/routes/groupmenu.routes")(app);
   return app;
 };
