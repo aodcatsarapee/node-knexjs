@@ -20,5 +20,6 @@ module.exports = function () {
   require("../app/routes/profile.routes")(app);
   require("../app/routes/role.routes")(app);
   require("../app/routes/groupmenu.routes")(app);
+  require("../app/routes/menu.routes")(app);
   return app;
 };
