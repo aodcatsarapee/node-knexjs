@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-06-03 23:26:23
+Date: 2020-06-04 10:59:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,16 +24,18 @@ CREATE TABLE `group_menu` (
   `group_menu_name` varchar(100) DEFAULT NULL,
   `group_menu_icon` varchar(50) DEFAULT NULL,
   `group_menu_sort` tinyint(3) unsigned DEFAULT NULL,
+  `group_menu_create` datetime DEFAULT NULL,
   `group_menu_update` datetime DEFAULT NULL,
   PRIMARY KEY (`group_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of group_menu
 -- ----------------------------
-INSERT INTO `group_menu` VALUES ('7', 'คลังสินค้า', 'fa fa-cog', '1', '2018-06-17 17:22:51');
-INSERT INTO `group_menu` VALUES ('8', 'ควบคุมระบบ', 'fa fa-cogs', '2', '2018-05-31 11:05:54');
-INSERT INTO `group_menu` VALUES ('9', 'ประวัติการใช้งาน', 'fa fa-list', '3', '2018-05-31 11:05:54');
+INSERT INTO `group_menu` VALUES ('7', 'คลังสินค้า', 'fa fa-cog', '1', null, '2018-06-17 17:22:51');
+INSERT INTO `group_menu` VALUES ('8', 'ควบคุมระบบ', 'fa fa-cogs', '2', null, '2018-05-31 11:05:54');
+INSERT INTO `group_menu` VALUES ('9', 'ประวัติการใช้งาน', 'fa fa-list', '3', null, '2018-05-31 11:05:54');
+INSERT INTO `group_menu` VALUES ('12', 'test1', 'fa fa-home1', '6', '2020-06-04 10:56:15', '2020-06-04 10:56:38');
 
 -- ----------------------------
 -- Table structure for log_user_login
@@ -106,17 +108,17 @@ CREATE TABLE `map_menu_role` (
   KEY `fk_map_role_menu_role1_idx` (`role_id`),
   CONSTRAINT `map_menu_role_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `map_menu_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of map_menu_role
 -- ----------------------------
-INSERT INTO `map_menu_role` VALUES ('147', '23', '1');
 INSERT INTO `map_menu_role` VALUES ('152', '24', '1');
-INSERT INTO `map_menu_role` VALUES ('153', '25', '1');
 INSERT INTO `map_menu_role` VALUES ('157', '23', '2');
 INSERT INTO `map_menu_role` VALUES ('159', '32', '2');
-INSERT INTO `map_menu_role` VALUES ('162', '32', '1');
+INSERT INTO `map_menu_role` VALUES ('163', '25', '1');
+INSERT INTO `map_menu_role` VALUES ('165', '32', '1');
+INSERT INTO `map_menu_role` VALUES ('166', '23', '1');
 
 -- ----------------------------
 -- Table structure for menu
@@ -131,6 +133,7 @@ CREATE TABLE `menu` (
   `menu_openlink` tinyint(4) DEFAULT NULL COMMENT '0= หน้าเดิม , 1= หน้าใหม่',
   `menu_icon` varchar(255) DEFAULT NULL,
   `menu_sort` int(10) unsigned DEFAULT NULL,
+  `menu_create` datetime DEFAULT NULL,
   `menu_update` datetime DEFAULT NULL,
   PRIMARY KEY (`menu_id`),
   KEY `fk_menu_group_menu1_idx` (`group_menu_id`),
@@ -140,10 +143,10 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('23', '8', 'ผู้ใช้ระบบ', 'user', '1', '0', 'far fa-circle nav-icon', '1', '2018-05-31 12:16:29');
-INSERT INTO `menu` VALUES ('24', '8', 'สิทธิ์การใช้งาน', 'role', '1', '0', 'far fa-circle nav-icon', '2', '2018-05-31 12:16:29');
-INSERT INTO `menu` VALUES ('25', '8', 'กลุ่มเมนู', 'groupmenu', '1', '0', 'far fa-circle nav-icon', '3', '2018-05-31 12:16:29');
-INSERT INTO `menu` VALUES ('32', '9', 'ประวัติใช้งานระบบ', 'loguserlogin', '1', '0', 'far fa-circle nav-icon', '32', '2018-05-31 12:16:29');
+INSERT INTO `menu` VALUES ('23', '8', 'ผู้ใช้ระบบ', 'user', '1', '0', 'far fa-circle nav-icon', '1', null, '2018-05-31 12:16:29');
+INSERT INTO `menu` VALUES ('24', '8', 'สิทธิ์การใช้งาน', 'role', '1', '0', 'far fa-circle nav-icon', '2', null, '2018-05-31 12:16:29');
+INSERT INTO `menu` VALUES ('25', '8', 'กลุ่มเมนู', 'groupmenu', '1', '0', 'far fa-circle nav-icon', '3', null, '2018-05-31 12:16:29');
+INSERT INTO `menu` VALUES ('32', '9', 'ประวัติใช้งานระบบ', 'loguserlogin', '1', '0', 'far fa-circle nav-icon', '32', null, '2018-05-31 12:16:29');
 
 -- ----------------------------
 -- Table structure for ref_user_status
@@ -207,7 +210,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', '2', '1', 'aodcat', '7iKsJ7+UqtZIPWyj97cPL6DgNvzYgFsoPj19pdRR6Ug=', 'aodcat@gmail.com', 'สรศักดิ์ ต้นเกณฑ์', '64/3  หมู่ 2 ต.สารภี อ.สารภี จ.เชียงใหม่ 50140', '0841703489', 'user_1591156368707.png', '2018-05-25 11:30:28', '2020-06-03 23:22:50');
+INSERT INTO `user` VALUES ('4', '1', '1', 'aodcat', 'ITpxJgyJvvZMro6SvHdRjv4//VXI/62mlm6EXSCWnqs=', 'aodcat@gmail.com', 'สรศักดิ์ ต้นเกณฑ์', '64/3  หมู่ 2 ต.สารภี อ.สารภี จ.เชียงใหม่ 50140', '0841703489', 'user_1591156368707.png', '2018-05-25 11:30:28', '2020-06-04 10:15:50');
 INSERT INTO `user` VALUES ('56', '2', '2', 'aodcat1', '5zkW6L90zEYVBFtO4DAeAtuK0M6RoaxHCRECj4OCHnw=', '123456@123456.cc', '1234567', '-', '-', 'user_1591113310095.jpg', '2020-06-02 17:05:19', '2020-06-03 23:18:10');
 INSERT INTO `user` VALUES ('57', '1', '2', 'aodcat2', 'kpIO1HSwx5HzliraNIYVAczMxhhDTvgLb33zGX0wgdA=', '111111@11.cc', '111111', '', '111111', 'user_1591095660741.png', '2020-06-02 17:16:48', '2020-06-02 23:20:58');
 INSERT INTO `user` VALUES ('58', '1', '2', 'aodcat3', 'Kp0U6VisUs4antotHP7TsanRBJl09WiU21z+3RVhXmI=', 'dd@dd.cc', '123456', '6666', '555555', 'user_1591095844835.png', '2020-06-02 17:59:00', '2020-06-02 23:20:51');
