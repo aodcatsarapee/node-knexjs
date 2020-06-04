@@ -44,7 +44,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjQsInJvbGVfaWQiOjF9LCJpYXQiOjE1OTA2NDkzMTYsImV4cCI6MTU5MDY0OTM3Nn0.w_-GtGOml1ZC6eMGChad1ZBocHDYHxW6lJc4RBYZIOg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjQsInJvbGVfaWQiOjJ9LCJpYXQiOjE1OTEyMzk5OTAsImV4cCI6MTU5MTI4MzE5MH0.A3r-mAwTVUrornz4O752K910Em1BUNt87p8HsJ78hyM",
 									"type": "string"
 								}
 							]
@@ -354,7 +354,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjQsInJvbGVfaWQiOjF9LCJpYXQiOjE1OTEwNjg1MjMsImV4cCI6MTU5MTExMTcyM30.Ni4CSWseVNUc7r51xpSoFIM0dqrQeq-bnRuLlPuxT5Y",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjQsInJvbGVfaWQiOjJ9LCJpYXQiOjE1OTEyMDM1MTksImV4cCI6MTU5MTI0NjcxOX0.nZlkAJaueRg4GUyb7WenJDzgALGYTAfLLoyz3VNUZ-A",
 									"type": "string"
 								}
 							]
@@ -869,7 +869,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/groupmenu/getgroupbyid",
+							"raw": "http://localhost:8080/groupmenu/getgroupmenubyid?group_menu_id=8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -877,7 +877,13 @@
 							"port": "8080",
 							"path": [
 								"groupmenu",
-								"getgroupbyid"
+								"getgroupmenubyid"
+							],
+							"query": [
+								{
+									"key": "group_menu_id",
+									"value": "8"
+								}
 							]
 						}
 					},
@@ -944,8 +950,13 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\n\"group_menu_name\" : \"test\",\n\"group_menu_icon\" : \"fa fa-home\",\n\"group_menu_sort\" : \"4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/groupmenu/add",
@@ -986,8 +997,13 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\n\"group_menu_id\" : \"12\",\n\"group_menu_name\" : \"test1\",\n\"group_menu_icon\" : \"fa fa-home1\",\n\"group_menu_sort\" : \"6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/groupmenu/update",
@@ -1028,8 +1044,13 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\n\"group_menu_id\" : \"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/groupmenu/delete",
