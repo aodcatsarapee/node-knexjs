@@ -5,7 +5,7 @@ module.exports = {
       .count('menu.menu_id as count_menu')
       .from("group_menu")
       .leftJoin("menu", "menu.group_menu_id", "group_menu.group_menu_id")
-      .groupBy("group_menu.group_menu_id")
+      .groupBy("group_menu.group_menu_id").orderBy("group_menu.group_menu_sort")
   },
   getGroupMenuByID(group_menu_id) {
     return db.select("group_menu.group_menu_id", "group_menu.group_menu_name", "group_menu.group_menu_icon", "group_menu.group_menu_sort")
