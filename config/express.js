@@ -22,5 +22,6 @@ module.exports = function () {
   require("../app/routes/groupmenu.routes")(app);
   require("../app/routes/menu.routes")(app);
   require("../app/routes/systemlog.routes")(app);
+  require("../app/routes/log.routes")(app);
   return app;
 };
