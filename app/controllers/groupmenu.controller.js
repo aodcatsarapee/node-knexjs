@@ -117,6 +117,31 @@ module.exports = {
       }
     });
   },
+  sort: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        let count = 1;
+        let list = req.body.list;
+        list.forEach(row => {
+          groupMenuModel.updateGroupMenu(row.id, { group_menu_sort: count }).catch((error) => { res.status(500).send(error); });
+          count++;
+        });
+        let data = {
+          response: true,
+          message: "200 OK",
+          data: [],
+        };
+        res.send(data);
+      }
+    });
+  },
   delete: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err) => {
       if (err) {

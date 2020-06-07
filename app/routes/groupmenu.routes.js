@@ -5,5 +5,6 @@ module.exports = function (app) {
   app.get("/groupmenu/getgroupmenubyid", auth.verifyToken, groupmenu.getGroupMenuByID);
   app.post("/groupmenu/add", auth.verifyToken, groupmenu.add);
   app.post("/groupmenu/update", auth.verifyToken, groupmenu.update);
+  app.post("/groupmenu/sort", auth.verifyToken, groupmenu.sort);
   app.post("/groupmenu/delete", auth.verifyToken, groupmenu.delete);
 };
