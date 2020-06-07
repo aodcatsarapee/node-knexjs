@@ -103,25 +103,50 @@ module.exports = {
         res.send(data);
       } else {
         let data_update = {
-            menu_name: req.body.menu_name,
-            menu_icon: req.body.menu_icon,
-            menu_link: req.body.menu_link,
-            menu_sort: req.body.menu_sort,
-            menu_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-          };
-          menuModel
-            .updateMenu(req.body.menu_id,data_update)
-            .then(() => {
-              let data = {
-                response: true,
-                message: "200 OK",
-                data: [],
-              };
-              res.send(data);
-            })
-            .catch((error) => {
-              res.status(500).send(error);
-            });
+          menu_name: req.body.menu_name,
+          menu_icon: req.body.menu_icon,
+          menu_link: req.body.menu_link,
+          menu_sort: req.body.menu_sort,
+          menu_update: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        };
+        menuModel
+          .updateMenu(req.body.menu_id, data_update)
+          .then(() => {
+            let data = {
+              response: true,
+              message: "200 OK",
+              data: [],
+            };
+            res.send(data);
+          })
+          .catch((error) => {
+            res.status(500).send(error);
+          });
+      }
+    });
+  },
+  sort: (req, res) => {
+    jwt.verify(req.token, env.SECRETKEY, (err) => {
+      if (err) {
+        let data = {
+          response: false,
+          message: "401 Unauthorized",
+          data: [],
+        };
+        res.send(data);
+      } else {
+        let count = 1;
+        let list = req.body.list;
+        list.forEach(row => {
+          menuModel.updateMenu(row.id, { menu_id: count }).catch((error) => { res.status(500).send(error); });
+          count++;
+        });
+        let data = {
+          response: true,
+          message: "200 OK",
+          data: [],
+        };
+        res.send(data);
       }
     });
   },
