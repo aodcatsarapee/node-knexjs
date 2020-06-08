@@ -138,7 +138,7 @@ module.exports = {
         let count = 1;
         let list = req.body.list;
         list.forEach(row => {
-          menuModel.updateMenu(row.id, { menu_id: count }).catch((error) => { res.status(500).send(error); });
+          menuModel.updateMenu(row.id, { menu_sort: count }).catch((error) => { res.status(500).send(error); });
           count++;
         });
         let data = {
