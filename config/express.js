@@ -1,7 +1,6 @@
 const express = require("express");
 const bodypaarser = require("body-parser");
-const SocketIO = require("socket.io");
-const port = 8080;
+const port = process.env.PORT || 8080;
 module.exports = function () {
   const app = express();
   app.use(bodypaarser.urlencoded({ extended: false }));
@@ -29,17 +28,6 @@ module.exports = function () {
   const server = app.listen(port, function () {
     console.log('running in port http://localhost:' + port)
   })
-  const io = SocketIO.listen(server)
-  io.on('connection', function (socket) {
-    // connected io success
-    console.log('connected : ID =>', socket.id)
-    // disconnect
-    socket.on('disconnect', function () {
-      console.log(' disconnect : ID => ' + socket.id);
-    })
-    socket.on('sendMessage', (data) => {
-      socket.broadcast.emit('sendMessage', data)
-    })
-  })
+
   return app;
 };
