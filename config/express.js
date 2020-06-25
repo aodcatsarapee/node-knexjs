@@ -1,10 +1,13 @@
 const express = require("express");
 const bodypaarser = require("body-parser");
+
+const requestIp = require('request-ip');
 const port = process.env.PORT || 8080;
 module.exports = function () {
   const app = express();
   app.use(bodypaarser.urlencoded({ extended: false }));
   app.use(bodypaarser.json());
+  app.use(requestIp.mw())
   // allow cors
   app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
