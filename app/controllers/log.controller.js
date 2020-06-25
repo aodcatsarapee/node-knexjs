@@ -3,7 +3,6 @@ const env = require("../../config/env");
 const logModel = require("../model/log.model");
 // date time
 const moment = require("moment");
-moment.locale("TH")
 module.exports = {
   getLogUserLogin: (req, res) => {
     jwt.verify(req.token, env.SECRETKEY, (err) => {
@@ -34,7 +33,7 @@ module.exports = {
                   user_fullname: row.user_fullname,
                   log_text: row.log_text,
                   log_browser: row.log_browser,
-                  log_time: moment(row.log_time).add(543, 'year').format('LLL')
+                  log_time: moment(row.log_time).format("YYYY-MM-DD HH:mm:ss")
                 })
               })
             })

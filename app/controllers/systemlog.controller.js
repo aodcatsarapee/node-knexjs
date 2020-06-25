@@ -17,6 +17,7 @@ module.exports = {
         let data_add = {
           user_id: req.body.user_id,
           log_text: req.body.log_text,
+          log_ip_address: req.ip,
           log_browser: req.body.agent,
           log_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         };
