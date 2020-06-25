@@ -16,9 +16,9 @@
 // module.exports = env;
 
 const env = {
-  database: 'heroku_7b447c9ff43cafd',
-  username: 'b301256d5c59b7',
-  password: '8c0eae8d',
+  database: 'heroku_0bdbcccc39e9564',
+  username: 'b3dfb0b1a9d37f',
+  password: '5e931caa',
   host: 'us-cdbr-east-05.cleardb.net',
   dialect: 'mysql',
   pool: {
